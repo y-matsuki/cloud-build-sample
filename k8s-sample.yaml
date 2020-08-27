@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hoge
+spec:
+  selector:
+    matchLabels:
+      app: hoge
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hoge
+    spec:
+      containers:
+      - name: hoge
+        image: gcr.io/api-workshop-42501/cloud-build-sample/latest
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        ports:
+        - containerPort: 8080
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: hoge
+spec:
+  type: LoadBalancer
+  selector:
+    app: hoge
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080

@@ -1,0 +1,13 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'build', '-t', 'gcr.io/api-workshop-42501/cloud-build-sample/latest', '.' ]
+  id: docker build
+- name: 'gcr.io/cloud-builders/docker'
+  args: [ 'push', 'gcr.io/api-workshop-42501/cloud-build-sample/latest' ]
+  id: docker push
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: [ 'container', 'clousters', 'get-credentials', 'my-first-cluster', '--zone', 'asia-northeast1-c', '--project', 'api-workshop-42501' ]
+  id: gcloud container clusters get-credentials
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: [ 'apply', '-f', 'k8s-sample.yaml' ]
+  id: kubectl apply
