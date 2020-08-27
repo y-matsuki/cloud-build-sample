@@ -12,6 +12,5 @@ steps:
   args: [ 'apply', '-f', 'k8s-sample.yaml' ]
   id: kubectl apply
   env:
-    - 'CLOUDSDK_COMPUTE_REGION=asia-northeast1'
     - 'CLOUDSDK_COMPUTE_ZONE=asia-northeast1-c'
     - 'CLOUDSDK_CONTAINER_CLUSTER=my-first-cluster'
